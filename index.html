@@ -3,89 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Dashboard</title>
+    <title>Layla's Fitness Dashboard</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #1a1a1a;
-            color: #fff;
+            color: #e0e0e0;
             padding: 20px;
+            line-height: 1.6;
         }
-        
+
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         h1 {
             text-align: center;
-            margin-bottom: 40px;
-            color: #ff6b6b;
-        }
-        
-        .section {
-            background-color: #2a2a2a;
-            padding: 20px;
             margin-bottom: 30px;
-            border-radius: 8px;
-            border-left: 4px solid #ff6b6b;
-        }
-        
-        .section h2 {
-            margin-bottom: 15px;
             color: #ff6b6b;
+            font-size: 2.5em;
         }
-        
-        .workout-item {
-            background-color: #333;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
         }
-        
-        a {
+
+        .section {
+            background-color: #252525;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #4ecdc4;
+        }
+
+        .section h2 {
+            color: #4ecdc4;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .section a {
             color: #4ecdc4;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s ease;
         }
-        
-        a:hover {
-            text-decoration: underline;
+
+        .section a:hover {
+            color: #ff6b6b;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #4ecdc4;
+            color: #1a1a1a;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .button:hover {
+            background-color: #ff6b6b;
+        }
+
+        /* 12-Week Program Styles */
+        .program-container {
+            background-color: #252525;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .program-container h2 {
+            color: #ff6b6b;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+        }
+
+        .week {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            border-left: 3px solid #4ecdc4;
+        }
+
+        .week-title {
+            color: #4ecdc4;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .workout-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .workout-item:last-child {
+            border-bottom: none;
+        }
+
+        .workout-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #4ecdc4;
+            flex-shrink: 0;
+        }
+
+        .workout-link {
+            flex-grow: 1;
+            color: #4ecdc4;
+            text-decoration: none;
+            word-break: break-word;
+            transition: color 0.3s ease;
+        }
+
+        .workout-link:hover {
+            color: #ff6b6b;
+        }
+
+        .workout-duration {
+            color: #888;
+            font-size: 0.9em;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #333;
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #4ecdc4;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>💪 Fitness Dashboard</h1>
-        
-        <div class="section">
-            <h2>Warmups</h2>
-            <div class="workout-item">
-                <span>Warmup Playlist</span>
-                <a href="https://www.youtube.com/playlist?list=PLhu1QCKrfgPUczcbyXa35oUo2CdaHqgZ6" target="_blank">
-                    Watch on YouTube →
+        <h1>💪 Iron Series Fitness Dashboard</h1>
+
+        <div class="dashboard">
+            <!-- Warmups Section -->
+            <div class="section">
+                <h2>🔥 Warmups</h2>
+                <p>Get warmed up before each workout with Caroline's dynamic warmup playlist.</p>
+                <a href="https://www.youtube.com/playlist?list=PLhu1QCKrfgPUczcbyXa35oUo2CdaHqgZ6" class="button" target="_blank">
+                    View Warmup Playlist
                 </a>
+            </div>
+
+            <!-- Progress Summary -->
+            <div class="section">
+                <h2>📊 Progress Tracker</h2>
+                <p>Track your 12-week Iron Series journey:</p>
+                <p style="margin-top: 15px;">
+                    <strong>Total Workouts:</strong> <span id="total-workouts">0</span> / 36<br>
+                    <strong>Completion Rate:</strong> <span id="completion-rate">0</span>%
+                </p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="overall-progress"></div>
+                </div>
             </div>
         </div>
-        
-        <div class="section">
-            <h2>Iron Series Workouts</h2>
-            <div class="workout-item">
-                <span>Iron Series Video</span>
-                <a href="https://www.youtube.com/watch?v=HdCk-Ij3hXE" target="_blank">
-                    Watch on YouTube →
-                </a>
-            </div>
+
+        <!-- 12-Week Program -->
+        <div class="program-container">
+            <h2>📅 12-Week Iron Series Program</h2>
+            <p style="margin-bottom: 25px; color: #aaa;">3 workouts per week • Complete all 36 videos over 12 weeks</p>
+
+            <div id="program-weeks"></div>
         </div>
     </div>
+
+    <script>
+        // 12-week program data
+        const workouts = [
+            { week: 1, day: 1, title: "Leg Workout", duration: "41:48", videoNum: 1 },
+            { week: 1, day: 2, title: "Upper Body Workout - Shoulders, Back, Chest", duration: "35:59", videoNum: 2 },
+            { week: 1, day: 3, title: "Glute Workout", duration: "38:25", videoNum: 3 },
+            
+            { week: 2, day: 1, title: "Full Body Workout - Dumbbell Circuits", duration: "40:26", videoNum: 4 },
+            { week: 2, day: 2, title: "Arms and Abs Workout - Biceps, Triceps", duration: "38:03", videoNum: 5 },
+            { week: 2, day: 3, title: "Quad Workout", duration: "36:28", videoNum: 6 },
+            
+            { week: 3, day: 1, title: "Shoulders & Triceps Workout", duration: "34:07", videoNum: 7 },
+            { week: 3, day: 2, title: "Glutes & Hamstrings Workout - Hip Thrusts / RDL", duration: "35:57", videoNum: 8 },
+            { week: 3, day: 3, title: "Full Body Dumbbell Cardio Workout", duration: "35:40", videoNum: 9 },
+            
+            { week: 4, day: 1, title: "Back & Biceps Workout - Rows, Curls", duration: "36:40", videoNum: 10 },
+            { week: 4, day: 2, title: "Dumbbell Leg Workout - Calves Included", duration: "39:00", videoNum: 11 },
+            { week: 4, day: 3, title: "Upper Body Chest and Triceps Workout", duration: "35:31", videoNum: 12 },
+            
+            { week: 5, day: 1, title: "Posterior Chain Workout - Glutes, Hamstrings, Back", duration: "38:18", videoNum: 13 },
+            { week: 5, day: 2, title: "Unilateral Training Full Body Workout", duration: "37:24", videoNum: 14 },
+            { week: 5, day: 3, title: "Shoulder Workout - Compound & Isolation", duration: "35:16", videoNum: 15 },
+            
+            { week: 6, day: 1, title: "Hamstrings Workout - Hip Extension & Flexion", duration: "36:48", videoNum: 16 },
+            { week: 6, day: 2, title: "Complete Upper Body Workout", duration: "34:49", videoNum: 17 },
+            { week: 6, day: 3, title: "Dumbbell Glute Workout - Supersets", duration: "40:28", videoNum: 18 },
+            
+            { week: 7, day: 1, title: "Muscle Building Full Body Workout", duration: "36:48", videoNum: 19 },
+            { week: 7, day: 2, title: "Superset Arms, Abs and Core Workout", duration: "37:02", videoNum: 20 },
+            { week: 7, day: 3, title: "Dumbbell Leg Day Workout - Stepups", duration: "40:48", videoNum: 21 },
+            
+            { week: 8, day: 1, title: "Upper Body Chest and Back Workout", duration: "36:42", videoNum: 22 },
+            { week: 8, day: 2, title: "Superset Glutes and Hamstrings Workout", duration: "39:18", videoNum: 23 },
+            { week: 8, day: 3, title: "Full Body Circuits Workout - Dumbbells", duration: "39:36", videoNum: 24 },
+            
+            { week: 9, day: 1, title: "Superset Dumbbell Shoulder Workout", duration: "37:05", videoNum: 25 },
+            { week: 9, day: 2, title: "Leg Workout - Circuits & Step Ups", duration: "40:27", videoNum: 26 },
+            { week: 9, day: 3, title: "Upper Body Workout - Antagonist Sets", duration: "37:46", videoNum: 27 },
+            
+            { week: 10, day: 1, title: "Dumbbell Glute Workout - Iron Glutes", duration: "42:00", videoNum: 28 },
+            { week: 10, day: 2, title: "Final Full Body Workout - Hypertrophy", duration: "37:10", videoNum: 29 },
+            { week: 10, day: 3, title: "Arms, Abs and Core Workout (Finale)", duration: "36:42", videoNum: 30 },
+            
+            { week: 11, day: 1, title: "Leg Workout (Repeat)", duration: "41:48", videoNum: 1 },
+            { week: 11, day: 2, title: "Upper Body Workout (Repeat)", duration: "35:59", videoNum: 2 },
+            { week: 11, day: 3, title: "Glute Workout (Repeat)", duration: "38:25", videoNum: 3 },
+            
+            { week: 12, day: 1, title: "Full Body Workout (Repeat)", duration: "40:26", videoNum: 4 },
+            { week: 12, day: 2, title: "Arms and Abs Workout (Repeat)", duration: "38:03", videoNum: 5 },
+            { week: 12, day: 3, title: "Quad Workout (Repeat)", duration: "36:28", videoNum: 6 }
+        ];
+
+        // Playlist base URL
+        const playlistUrl = "https://www.youtube.com/playlist?list=PLhu1QCKrfgPWmStsg7imo5EQ0zmkxymJ2";
+
+        // Load data from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('ironSeriesProgress');
+            return saved ? JSON.parse(saved) : {};
+        }
+
+        // Save data to localStorage
+        function saveProgress(progress) {
+            localStorage.setItem('ironSeriesProgress', JSON.stringify(progress));
+            updateProgressBar();
+        }
+
+        // Initialize program
+        function initializeProgram() {
+            const container = document.getElementById('program-weeks');
+            let progress = loadProgress();
+
+            workouts.forEach((workout) => {
+                const weekDiv = document.getElementById(`week-${workout.week}`);
+                
+                if (!weekDiv) {
+                    const newWeek = document.createElement('div');
+                    newWeek.className = 'week';
+                    newWeek.id = `week-${workout.week}`;
+                    newWeek.innerHTML = `<div class="week-title">Week ${workout.week}</div>`;
+                    container.appendChild(newWeek);
+                }
+
+                const weekDiv2 = document.getElementById(`week-${workout.week}`);
+                const workoutId = `video-${workout.videoNum}`;
+                const isChecked = progress[workoutId] ? 'checked' : '';
+
+                const workoutDiv = document.createElement('div');
+                workoutDiv.className = 'workout-item';
+                workoutDiv.innerHTML = `
+                    <input 
+                        type="checkbox" 
+                        class="workout-checkbox" 
+                        id="${workoutId}"
+                        ${isChecked}
+                        onchange="updateWorkoutProgress('${workoutId}')">
+                    <a href="${playlistUrl}" target="_blank" class="workout-link">
+                        ${workout.videoNum}. ${workout.title}
+                        <span class="workout-duration">${workout.duration}</span>
+                    </a>
+                `;
+
+                weekDiv2.appendChild(workoutDiv);
+            });
+
+            updateProgressBar();
+        }
+
+        // Update progress when checkbox changes
+        function updateWorkoutProgress(workoutId) {
+            const checkbox = document.getElementById(workoutId);
+            let progress = loadProgress();
+
+            if (checkbox.checked) {
+                progress[workoutId] = true;
+            } else {
+                delete progress[workoutId];
+            }
+
+            saveProgress(progress);
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            let progress = loadProgress();
+            const completed = Object.keys(progress).length;
+            const total = workouts.length;
+            const percentage = Math.round((completed / total) * 100);
+
+            document.getElementById('total-workouts').textContent = completed;
+            document.getElementById('completion-rate').textContent = percentage;
+            document.getElementById('overall-progress').style.width = percentage + '%';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeProgram);
+    </script>
 </body>
 </html>
