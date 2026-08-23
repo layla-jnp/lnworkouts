@@ -1,349 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IRON Series - 12 Week Fitness Dashboard</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LN Workouts - Fitness Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-            padding: 20px;
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 3px solid #ff6b6b;
-            padding-bottom: 15px;
-        }
+    header {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
 
-        header h1 {
-            color: #ff6b6b;
-            font-size: 2.5em;
-            margin-bottom: 5px;
-        }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
 
-        header p {
-            color: #4ecdc4;
-            font-size: 1.1em;
-        }
+    header p {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    nav {
+      background-color: #222;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 2px solid #ff6b6b;
+    }
 
-        .progress-section {
-            background-color: #2a2a2a;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border-left: 4px solid #4ecdc4;
-        }
+    nav a {
+      color: #4ecdc4;
+      text-decoration: none;
+      margin: 0 1.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
 
-        .progress-section h2 {
-            color: #4ecdc4;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
+    nav a:hover {
+      color: #ff6b6b;
+    }
 
-        .progress-bar-container {
-            background-color: #1a1a1a;
-            border-radius: 10px;
-            height: 30px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
 
-        .progress-bar {
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
+    section {
+      margin-bottom: 3rem;
+    }
 
-        .progress-text {
-            color: #b0b0b0;
-            font-size: 0.95em;
-        }
+    section h2 {
+      font-size: 2rem;
+      color: #ff6b6b;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #4ecdc4;
+      padding-bottom: 0.5rem;
+    }
 
-        .week-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
+    .workout-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
 
-        .week-card {
-            background-color: #2a2a2a;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 4px solid #ff6b6b;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+    .workout-card {
+      background-color: #222;
+      border-left: 4px solid #4ecdc4;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        .week-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.2);
-        }
+    .workout-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(255, 107, 107, 0.2);
+    }
 
-        .week-card h3 {
-            color: #ff6b6b;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
+    .workout-card h3 {
+      color: #4ecdc4;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
 
-        .workout-item {
-            background-color: #1a1a1a;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
+    .workout-card ul {
+      list-style: none;
+    }
 
-        .workout-item input[type="checkbox"] {
-            margin-top: 4px;
-            cursor: pointer;
-            width: 18px;
-            height: 18px;
-            accent-color: #4ecdc4;
-        }
+    .workout-card li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
 
-        .workout-item.completed {
-            background-color: rgba(78, 205, 196, 0.1);
-        }
+    .workout-card input[type="checkbox"] {
+      margin-top: 0.3rem;
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+      accent-color: #ff6b6b;
+    }
 
-        .workout-item.completed label {
-            text-decoration: line-through;
-            color: #888;
-        }
+    .workout-card a {
+      color: #4ecdc4;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      flex: 1;
+    }
 
-        .workout-item label {
-            flex: 1;
-            cursor: pointer;
-            font-size: 0.95em;
-        }
+    .workout-card a:hover {
+      color: #ff6b6b;
+      text-decoration: underline;
+    }
 
-        .workout-item a {
-            color: #4ecdc4;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
+    .progress-section {
+      background-color: #222;
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      text-align: center;
+      border: 2px solid #4ecdc4;
+    }
 
-        .workout-item a:hover {
-            color: #ff6b6b;
-            text-decoration: underline;
-        }
+    .progress-section h3 {
+      color: #4ecdc4;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
 
-        .reset-button {
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            transition: background-color 0.2s;
-            margin-top: 20px;
-        }
+    .progress-bar {
+      width: 100%;
+      height: 30px;
+      background-color: #333;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
 
-        .reset-button:hover {
-            background-color: #ff5252;
-        }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff6b6b 0%, #ee5a6f 100%);
+      width: 0%;
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
 
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-            color: #888;
-            font-size: 0.9em;
-        }
+    .progress-text {
+      color: #e0e0e0;
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+    }
 
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8em;
-            }
+    footer {
+      background-color: #111;
+      padding: 1.5rem;
+      text-align: center;
+      color: #999;
+      border-top: 2px solid #ff6b6b;
+      margin-top: 3rem;
+    }
 
-            .week-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    footer p {
+      margin: 0.5rem 0;
+    }
+
+    .reset-btn {
+      background-color: #ff6b6b;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .reset-btn:hover {
+      background-color: #ee5a6f;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+
+      .workout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>💪 IRON Series</h1>
-        <p>12-Week Fitness Dashboard</p>
-    </header>
+  <header>
+    <h1>LN Workouts</h1>
+    <p>Your Complete Fitness Dashboard</p>
+  </header>
 
-    <div class="container">
-        <div class="progress-section">
-            <h2>Overall Progress</h2>
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <div class="progress-text">
-                <span id="completedCount">0</span> / <span id="totalCount">0</span> workouts completed
-            </div>
-        </div>
+  <nav>
+    <a href="#warmups">Warmups</a>
+    <a href="#iron-series">IRON Series</a>
+    <a href="#progress">Progress</a>
+  </nav>
 
-        <div class="week-grid" id="weekGrid"></div>
-
-        <button class="reset-button" onclick="resetProgress()">Reset All Progress</button>
+  <main>
+    <div class="progress-section">
+      <h3>Overall Progress</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill">0%</div>
+      </div>
+      <div class="progress-text">
+        <span id="completedCount">0</span> / <span id="totalCount">0</span> workouts completed
+      </div>
+      <button class="reset-btn" onclick="resetProgress()">Reset Progress</button>
     </div>
 
-    <footer>
-        <p>Workouts from Caroline Girvan's IRON Series | Track your progress and stay consistent 🎯</p>
-    </footer>
+    <section id="warmups">
+      <h2>Warmups</h2>
+      <div class="workout-grid">
+        <div class="workout-card">
+          <h3>Warmup Collection</h3>
+          <ul>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=xqLWWQwVFCE" target="_blank">5 Min Full Body Warm Up</a> (5:42)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=v7V_ONBajJE" target="_blank">10 Min Full Body Dynamic Stretching</a> (10:30)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=w5qw-0cePcY" target="_blank">5 Min Shoulder Warm Up</a> (5:15)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=bnVsz_-lCIg" target="_blank">10 Min Leg Warm Up</a> (10:45)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=vSKZSJEr5I8" target="_blank">5 Min Hip Mobility Flow</a> (5:30)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <script>
-        // Video data: 30 videos from IRON Series
-        const videos = [
-            { id: 'SCxNnWW2zB8', title: 'Leg Workout' },
-            { id: 'tczVC2rRO7U', title: 'Back & Bicep Workout' },
-            { id: '2Qd-LJNJYWA', title: 'Shoulder & Trap Workout' },
-            { id: 'xVj2Q2_2EJY', title: 'Chest & Tricep Workout' },
-            { id: 'U-OYrmX2-k0', title: 'Full Body Workout' },
-            { id: 'UBlcDuodQXM', title: 'Leg Workout' },
-            { id: '0i5RILMI1Mk', title: 'Back & Bicep Workout' },
-            { id: 'CFF4vI0oGPg', title: 'Shoulder & Trap Workout' },
-            { id: 'BAtaHTTyfPI', title: 'Chest & Tricep Workout' },
-            { id: 'xPxCcwG56Po', title: 'Full Body Workout' },
-            { id: 'g4_muCNsPdk', title: 'Leg Workout' },
-            { id: 'Hww8Y6GxVbw', title: 'Back & Bicep Workout' },
-            { id: 'ZQfJ36EXX2s', title: 'Shoulder & Trap Workout' },
-            { id: 'KAEALlzcMcQ', title: 'Chest & Tricep Workout' },
-            { id: 'xbtAVsMdVSY', title: 'Full Body Workout' },
-            { id: 'knrmFCI4XiI', title: 'Leg Workout' },
-            { id: '_UFvhXTN2-U', title: 'Back & Bicep Workout' },
-            { id: 'EN-zuVg4mok', title: 'Shoulder & Trap Workout' },
-            { id: 'SjSJU-LOLf8', title: 'Chest & Tricep Workout' },
-            { id: 'B-XyUrXEaCw', title: 'Full Body Workout' },
-            { id: 'ucTDJRJjFQ4', title: 'Leg Workout' },
-            { id: 'dnHSrYHT0Zk', title: 'Back & Bicep Workout' },
-            { id: 'K-tLY96Jq6o', title: 'Shoulder & Trap Workout' },
-            { id: 'LubR2sFpT_E', title: 'Chest & Tricep Workout' },
-            { id: 'ReE9zLhksbc', title: 'Full Body Workout' },
-            { id: 'xefU5YoKMoI', title: 'Leg Workout' },
-            { id: 'tfgeRvBRtME', title: 'Back & Bicep Workout' },
-            { id: '9xA0yL0KXkU', title: 'Shoulder & Trap Workout' },
-            { id: 'bOJpvux_klI', title: 'Chest & Tricep Workout' },
-            { id: 'P4cMTLqtRII', title: 'Arms, Abs and Core Workout' }
-        ];
-
-        // Program structure: 12 weeks, 3 workouts per week
-        const program = [
-            { week: 1, workouts: [0, 1, 2] },
-            { week: 2, workouts: [3, 4, 5] },
-            { week: 3, workouts: [6, 7, 8] },
-            { week: 4, workouts: [9, 10, 11] },
-            { week: 5, workouts: [12, 13, 14] },
-            { week: 6, workouts: [15, 16, 17] },
-            { week: 7, workouts: [18, 19, 20] },
-            { week: 8, workouts: [21, 22, 23] },
-            { week: 9, workouts: [24, 25, 26] },
-            { week: 10, workouts: [27, 28, 29] },
-            { week: 11, workouts: [0, 1, 2] },
-            { week: 12, workouts: [3, 4, 5] }
-        ];
-
-        // Initialize and render
-        function initDashboard() {
-            renderWeeks();
-            updateProgress();
-        }
-
-        function renderWeeks() {
-            const weekGrid = document.getElementById('weekGrid');
-            weekGrid.innerHTML = '';
-
-            program.forEach(weekData => {
-                const weekCard = document.createElement('div');
-                weekCard.className = 'week-card';
-                weekCard.innerHTML = `<h3>Week ${weekData.week}</h3>`;
-
-                weekData.workouts.forEach((videoIndex, dayIndex) => {
-                    const video = videos[videoIndex];
-                    const checkboxId = `video-${weekData.week}-${dayIndex}`;
-                    const isCompleted = localStorage.getItem(checkboxId) === 'true';
-
-                    const workoutItem = document.createElement('div');
-                    workoutItem.className = `workout-item ${isCompleted ? 'completed' : ''}`;
-                    workoutItem.innerHTML = `
-                        <input type="checkbox" id="${checkboxId}" ${isCompleted ? 'checked' : ''} onchange="updateProgress()">
-                        <label for="${checkboxId}">
-                            <a href="https://youtu.be/${video.id}" target="_blank">${video.title}</a>
-                        </label>
-                    `;
-
-                    // Save state to localStorage when checkbox changes
-                    workoutItem.querySelector('input').addEventListener('change', (e) => {
-                        localStorage.setItem(checkboxId, e.target.checked);
-                        workoutItem.classList.toggle('completed', e.target.checked);
-                        updateProgress();
-                    });
-
-                    weekCard.appendChild(workoutItem);
-                });
-
-                weekGrid.appendChild(weekCard);
-            });
-        }
-
-        function updateProgress() {
-            let completed = 0;
-            const total = program.length * 3; // 12 weeks × 3 workouts per week
-
-            program.forEach(weekData => {
-                weekData.workouts.forEach((_, dayIndex) => {
-                    const checkboxId = `video-${weekData.week}-${dayIndex}`;
-                    if (localStorage.getItem(checkboxId) === 'true') {
-                        completed++;
-                    }
-                });
-            });
-
-            const percentage = (completed / total) * 100;
-            document.getElementById('progressBar').style.width = percentage + '%';
-            document.getElementById('progressBar').textContent = Math.round(percentage) + '%';
-            document.getElementById('completedCount').textContent = completed;
-            document.getElementById('totalCount').textContent = total;
-        }
-
-        function resetProgress() {
-            if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
-                program.forEach(weekData => {
-                    weekData.workouts.forEach((_, dayIndex) => {
-                        const checkboxId = `video-${weekData.week}-${dayIndex}`;
-                        localStorage.removeItem(checkboxId);
-                    });
-                });
-                renderWeeks();
-                updateProgress();
-            }
-        }
-
-        // Initialize on page load
-        initDashboard();
-    </script>
-</body>
-</html>
+    <section id="iron-series">
+      <h2>IRON Series (30 Min Workouts)</h2>
+      <div class="workout-grid">
+        <div class="workout-card">
+          <h3>Week 1</h3>
+          <ul>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=SCxNnWW2zB8" target="_blank">IRON Series 30 Min Leg Workout - Dumbbell Leg Day</a> (41:48)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=tczVC2rRO7U" target="_blank">IRON Series 30 Min Upper Body Workout - Shoulders, Back, Chest</a> (35:59)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=2Qd-LJNJYWA" target="_blank">IRON Series 30 Min Glute Workout - Dumbbell Lower Body</a> (38:25)</li>
+          </ul>
+        </div>
+        <div class="workout-card">
+          <h3>Week 2</h3>
+          <ul>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=xVj2Q2_2EJY" target="_blank">IRON Series 30 Min Full Body Workout - Dumbbell Circuits</a> (40:26)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=U-OYrmX2-k0" target="_blank">IRON Series 30 Min Arms and Abs Workout - Biceps, Triceps</a> (38:03)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=UBlcDuodQXM" target="_blank">IRON Series 30 Min Quad Workout - Dumbbell Leg Day</a> (36:28)</li>
+          </ul>
+        </div>
+        <div class="workout-card">
+          <h3>Week 3</h3>
+          <ul>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=0i5RILMI1Mk" target="_blank">IRON Series 30 Min Shoulders & Triceps Workout - Dumbbells</a> (34:07)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=CFF4vI0oGPg" target="_blank">IRON Series 30 Min Glutes & Hamstrings Workout - Hip Thrusts / RDL</a> (35:57)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=BAtaHTTyfPI" target="_blank">IRON Series 30 Min Full Body Dumbbell Cardio Workout</a> (35:40)</li>
+          </ul>
+        </div>
+        <div class="workout-card">
+          <h3>Week 4</h3>
+          <ul>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=xPxCcwG56Po" target="_blank">IRON Series 30 Min Back & Biceps Workout - Rows, Curls</a> (36:40)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=g4_muCNsPdk" target="_blank">IRON Series 30 Min Dumbbell Leg Workout - Calves Included</a> (39:00)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=Hww8Y6GxVbw" target="_blank">IRON Series 30 Min Upper Body Chest and Triceps Workout</a> (35:31)</li>
+          </ul>
+        </div>
+        <div class="workout-card">
+          <h3>Week 5</h3>
+          <ul>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=ZQfJ36EXX2s" target="_blank">IRON Series 30 Min Posterior Chain Workout - Glutes, Hamstrings, Back</a> (38:18)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=KAEALlzcMcQ" target="_blank">IRON Series 30 Min Unilateral Training Full Body Workout</a> (37:24)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=xbtAVsMdVSY" target="_blank">IRON Series 30 Min Shoulder Workout - Compound & Isolation</a> (35:16)</li>
+          </ul>
+        </div>
+        <div class="workout-card">
+          <h3>Week 6</h3>
+          <ul>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=knrmFCI4XiI" target="_blank">IRON Series 30 Min Hamstrings Workout - Hip Extension & Flexion</a> (36:48)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=_UFvhXTN2-U" target="_blank">IRON Series 30 Min Complete Upper Body Workout</a> (34:49)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=EN-zuVg4mok" target="_blank">IRON Series 30 Min Dumbbell Glute Workout - Supersets</a> (40:28)</li>
+          </ul>
+        </div>
+        <div class="workout-card">
+          <h3>Week 7</h3>
+          <ul>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=SjSJU-LOLf8" target="_blank">IRON Series 30 Min Muscle Building Full Body Workout</a> (36:48)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=B-XyUrXEaCw" target="_blank">IRON Series 30 Min Superset Arms, Abs and Core Workout</a> (37:02)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=ucTDJRJjFQ4" target="_blank">IRON Series 30 Min Dumbbell Leg Day Workout - Stepups</a> (40:48)</li>
+          </ul>
+        </div>
+        <div class="workout-card">
+          <h3>Week 8</h3>
+          <ul>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=dnHSrYHT0Zk" target="_blank">IRON Series 30 Min Upper Body Chest and Back Workout</a> (36:42)</li>
+            <li><input type="checkbox" class="workout-check"> <a href="https://www.youtube.com/watch?v=K-tLY96Jq6o" target="_blank">IRON Series 30 Min Superset Glutes
