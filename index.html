@@ -359,5 +359,66 @@
     </div>
   </div>
 </section>
+  
+  </main>
+
+  <footer>
+    <p>&copy; 2026 LN Workouts. Stay strong, stay consistent.</p>
+    <p>Built with ❤️ for your fitness journey</p>
+  </footer>
+
+  <script>
+    const workoutChecks = document.querySelectorAll('.workout-check');
+    const totalCount = document.getElementById('totalCount');
+    const completedCount = document.getElementById('completedCount');
+    const progressFill = document.getElementById('progressFill');
+
+    // Set total count
+    totalCount.textContent = workoutChecks.length;
+
+    // Load saved progress
+    function loadProgress() {
+      workoutChecks.forEach((checkbox, index) => {
+        const saved = localStorage.getItem(`workout-${index}`);
+        if (saved === 'true') {
+          checkbox.checked = true;
+        }
+      });
+      updateProgress();
+    }
+
+    // Update progress
+    function updateProgress() {
+      const completed = document.querySelectorAll('.workout-check:checked').length;
+      completedCount.textContent = completed;
+      const percentage = Math.round((completed / workoutChecks.length) * 100);
+      progressFill.style.width = percentage + '%';
+      progressFill.textContent = percentage + '%';
+    }
+
+    // Add event listeners
+    workoutChecks.forEach((checkbox, index) => {
+      checkbox.addEventListener('change', () => {
+        localStorage.setItem(`workout-${index}`, checkbox.checked);
+        updateProgress();
+      });
+    });
+
+    // Reset progress
+    function resetProgress() {
+      if (confirm('Are you sure you want to reset all progress?')) {
+        workoutChecks.forEach((checkbox, index) => {
+          checkbox.checked = false;
+          localStorage.removeItem(`workout-${index}`);
+        });
+        updateProgress();
+      }
+    }
+
+    // Load on page load
+    window.addEventListener('load', loadProgress);
+  </script>
+</body>
+</html>
 
  
